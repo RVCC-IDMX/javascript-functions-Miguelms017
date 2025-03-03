@@ -6,7 +6,7 @@ import { createRecipe, addIngredient, addStep } from './recipe-basics.js';
 
 /* c8 ignore start */
 // Set to true to see console examples when running this file directly
-const SHOW_EXAMPLES = false;
+const SHOW_EXAMPLES = true;
 /* c8 ignore stop */
 
 // An outer variable - accessible to all functions in this file
@@ -29,6 +29,9 @@ function addRecipe(recipe) {
   // Return true to indicate success
 
   // YOUR CODE HERE
+  recipeCollection.push(recipe);
+
+  return true;
 }
 
 /**
@@ -49,6 +52,11 @@ const findRecipe = (name) => {
   // This should be written as an arrow function
 
   // YOUR CODE HERE
+  if (recipeCollection.find(recipe => recipe.name === name)) {
+    return recipeCollection.find(recipe => recipe.name === name);
+  } else {
+    return undefined;
+  }
 };
 
 /**
@@ -68,6 +76,8 @@ function getQuickRecipes(maxTime = 30) {
   // The function has a default parameter of 30 minutes
 
   // YOUR CODE HERE
+  let recmin = recipeCollection.filter(recipe => recipe.cookingTime <= maxTime);
+  return recmin;
 }
 
 /**
@@ -84,6 +94,7 @@ function clearRecipes() {
   // Reset the recipeCollection to an empty array
 
   // YOUR CODE HERE
+  recipeCollection = [];
 }
 
 /* c8 ignore start */

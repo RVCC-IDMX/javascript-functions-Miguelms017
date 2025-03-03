@@ -6,7 +6,7 @@ import { createRecipe, addIngredient, addStep } from './recipe-basics.js';
 
 /* c8 ignore start */
 // Set to true to see console examples when running this file directly
-const SHOW_EXAMPLES = false;
+const SHOW_EXAMPLES = true;
 /* c8 ignore stop */
 
 /**
@@ -25,6 +25,8 @@ const timePerServing = recipe => {
   // that divides the recipe's cookingTime by its servings
 
   // YOUR CODE HERE
+  const tps = recipe.cookingTime / recipe.servings;
+  return tps;
 };
 
 /**
@@ -45,6 +47,21 @@ const getStepsList = (recipe) => {
   // Return the formatted string
 
   // YOUR CODE HERE
+  let i = 0;
+  let arr = [];
+
+  if (recipe.steps.length == 0) {
+    return "No steps added yet"
+  } else {
+    do {
+      arr.push(`${i + 1}. ${recipe.steps[i]}`);
+      i += 1;
+    } while (i < recipe.steps.length);
+
+    let str = arr.join("\n");
+
+    return str;
+  };
 };
 
 /**
@@ -66,6 +83,21 @@ const getIngredientsList = (recipe) => {
   // Return the formatted string
 
   // YOUR CODE HERE
+  let i = 0;
+  let arr = [];
+
+  if (recipe.ingredients.length == 0) {
+    return "No ingredients added yet"
+  } else {
+    do {
+      arr.push(`${recipe.ingredients[i].amount} ${recipe.ingredients[i].unit} of ${recipe.ingredients[i].name}`);
+      i += 1;
+    } while (i < recipe.ingredients.length);
+
+    let str = arr.join("\n");
+
+    return str;
+  };
 };
 
 /**
@@ -87,6 +119,12 @@ function formatRecipe(recipe) {
   // Return the complete formatted string
 
   // YOUR CODE HERE
+  const timeServing = timePerServing(recipe);
+  const Ingrs = getIngredientsList(recipe);
+  const stps = getStepsList(recipe);
+
+  return `${recipe.name} \nfor ${recipe.servings} people\nCooking time: ${recipe.cookingTime} minutes\nTime per serving: ${timeServing.toFixed(1)} minutes\nIngredients: \n${Ingrs} \nSteps: \n${stps}`
+
 }
 
 /* c8 ignore start */
